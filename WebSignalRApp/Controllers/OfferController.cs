@@ -9,11 +9,35 @@ namespace WebSignalRApp.Controllers
     [ApiController]
     public class OfferController : ControllerBase
     {
+        public OfferController()
+        {
+            if (!System.IO.File.Exists("bmw.txt"))
+            {
+                FileHelper.Write("bmw",9500);
+            }
+            if (!System.IO.File.Exists("chevrolet.txt"))
+            {
+                FileHelper.Write("chevrolet", 4300);
+            }
+        }
         // GET: api/<OfferController>
         [HttpGet]
         public double Get()
         {
             return FileHelper.Read();
+        }
+
+        [HttpGet("Room")]
+        public double Get(string room)
+        {
+            return FileHelper.Read(room);
+        }
+
+        [HttpGet("IncreaseRoom")]
+        public void Increase(string room,double data)
+        {
+            var result = FileHelper.Read() + data;
+            FileHelper.Write(result);
         }
 
         [HttpGet("Increase")]
