@@ -36,8 +36,8 @@ namespace WebSignalRApp.Controllers
         [HttpGet("IncreaseRoom")]
         public void Increase(string room,double data)
         {
-            var result = FileHelper.Read() + data;
-            FileHelper.Write(result);
+            var result = FileHelper.Read(room) + data;
+            FileHelper.Write(room,result);
         }
 
         [HttpGet("Increase")]
